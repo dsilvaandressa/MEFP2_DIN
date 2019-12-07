@@ -42,12 +42,11 @@
     
     !tentativa inicial - inicializações
     Y=X
-    fint=0.d0
     pct=200 !nº total de passos de tempo
     tol=1d-6
     err = 1d0
     it = 0
-    ep = "EPD" ! "EPD" ou "EPT"
+    ep = "EPT" ! "EPD" ou "EPT"
     
     !Inicializações Dinâmica
     ace=0.d0
@@ -56,8 +55,8 @@
     t = 0.d0
     gama_newmark = 0.5d0
     beta_newmark = 0.25d0
-    b1 = 1d0 !parâmetros para o cálculo de C - multiplica HESS
-    b2 = 1d0 !parâmetros para o cálculo de C - multiplica matriz de massa
+    b1 = 0d0 !parâmetros para o cálculo de C - multiplica HESS
+    b2 = 0d0 !parâmetros para o cálculo de C - multiplica matriz de massa
     
     !Início do processamento
     !Passos de tempo - pc
@@ -143,10 +142,8 @@ nr:        do !while (err>tol) !newton raphson
                         end do !gl2
                     end do !gl
                 end do !pi
-                
-                !adicionar parte dinâmica à força interna 
-                !fint(ind) = fint(ind) + matmul(MASS,Y(ind))/(beta_newmark*dt*dt) - matmul(MASS,Q) + gama_newmark*matmul(C_loc,Y(ind))/(beta_newmark*dt) + matmul(C_loc,R) - matmul(C_loc,Q)*gama_newmark*dt
-                MASS_G(ind,ind) = MASS
+
+                MASS_G(ind,ind) = MASS_G(ind,ind) + MASS
             end do !el
             
             call calc_C()

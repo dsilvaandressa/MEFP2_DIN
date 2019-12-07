@@ -141,8 +141,9 @@
             end do
             
             do i=1,10
-                ccar(i*2-1) = X1(i)*2 + X2(i)*1.5 !força de corpo na dir x1
-                ccar(i*2) = X1(i)*2 + X2(i)*1.5   !força de corpo na dir x2
+                !ccar(i*2-1) = X1(i)*2 + X2(i)*1.5 !força de corpo na dir x1
+                !ccar(i*2) = X1(i)*2 + X2(i)*1.5   !força de corpo na dir x2
+                ccar = 0.d0
             end do        
         end subroutine CC_el
     
